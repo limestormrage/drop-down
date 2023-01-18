@@ -4,7 +4,7 @@ import './App.css';
 function App(): JSX.Element {
   return (
     <div className="App">
-      <h1>s</h1>
+      <p>Проверка шрифта</p>
     </div>
   );
 }
