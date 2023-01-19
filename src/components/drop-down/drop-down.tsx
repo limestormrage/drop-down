@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './drop-down.module.css';
 import { ReactComponent as ArrowIcon } from './arrow.svg';
 import DropList from '../drop-list/drop-list';
 
 export default function DropDown(): JSX.Element {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
     <div className={styles.dropDown}>
       <p className={styles.title}>Язык</p>
@@ -31,11 +33,20 @@ export default function DropDown(): JSX.Element {
         <button
           className={styles.dropDownTestButton}
           type="button"
+          onClick={() => setIsOpen(true)}
         >
-          <ArrowIcon width="10px" height="5px" className={styles.buttonIcon} />
+          <ArrowIcon
+            className={styles.buttonIcon}
+            width="10px"
+            height="5px"
+          />
         </button>
       </div>
-      <DropList />
+
+      {isOpen && (
+        <DropList />
+      )}
+
     </div>
   );
 }
