@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styles from './drop-down.module.css';
-import { ReactComponent as ArrowIcon } from './arrow.svg';
 import DropList from '../drop-list/drop-list';
+import { ReactComponent as ArrowIcon } from './arrow.svg';
+import { ReactComponent as RemoveIcon } from './remove.svg';
 
 export default function DropDown(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -16,8 +17,13 @@ export default function DropDown(): JSX.Element {
             <button
               className={styles.labelButton}
               type="button"
+              aria-label="удалить фильтр"
             >
-              x
+              <RemoveIcon
+                className={styles.labelIcon}
+                width="8px"
+                height="8px"
+              />
             </button>
           </div>
           <div className={styles.label}>
@@ -26,7 +32,11 @@ export default function DropDown(): JSX.Element {
               className={styles.labelButton}
               type="button"
             >
-              x
+              <RemoveIcon
+                className={styles.labelIcon}
+                width="8px"
+                height="8px"
+              />
             </button>
           </div>
         </div>

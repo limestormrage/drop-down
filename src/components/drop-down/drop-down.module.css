@@ -49,13 +49,22 @@
 
 .labelButton {
   margin-left: 10px;
+  cursor: pointer;
+}
+
+.labelIcon {
+  width: 8px;
+  height: 8px;
+}
+
+.dropDownTestButton {
+  cursor: pointer;
 }
 
 .buttonIcon {
   width: 10px;
   height: 5px;
   transform: rotate(180deg);
-  cursor: pointer;
 }
 
 .buttonIconOpen {
