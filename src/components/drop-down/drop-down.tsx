@@ -3,13 +3,16 @@ import styles from './drop-down.module.css';
 import DropList from '../drop-list/drop-list';
 import { ReactComponent as ArrowIcon } from './arrow.svg';
 import { ReactComponent as RemoveIcon } from './remove.svg';
+import { IDopDownProps } from './interface';
 
-export default function DropDown(): JSX.Element {
+export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <div className={styles.dropDown}>
-      <p className={styles.title}>Язык</p>
+      <p className={styles.title}>
+        {label}
+      </p>
       <div className={styles.dropDownTest}>
         <div className={styles.labels}>
           <div className={styles.label}>
@@ -43,7 +46,7 @@ export default function DropDown(): JSX.Element {
         <button
           className={styles.dropDownTestButton}
           type="button"
-          onClick={() => setIsOpen(true)}
+          onClick={() => setIsOpen(!isOpen)}
         >
           <ArrowIcon
             className={styles.buttonIcon}
@@ -54,7 +57,7 @@ export default function DropDown(): JSX.Element {
       </div>
 
       {isOpen && (
-        <DropList />
+        <DropList items={MenuItems} />
       )}
 
     </div>
