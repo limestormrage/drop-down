@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './drop-down.module.css';
 import DropList from '../drop-list/drop-list';
 import { ReactComponent as ArrowIcon } from './arrow.svg';
@@ -7,9 +7,27 @@ import { IDopDownProps } from './interface';
 
 export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropDownRef = useRef<HTMLDivElement>(null);
+
+  // добавляет обработчик для закрытия при нажатии вне компонента
+  useEffect(() => {
+    const handleClick = (e: Event): void => {
+      if (!(e.target instanceof HTMLElement)) {
+        return;
+      }
+
+      if (!dropDownRef.current?.contains(e.target) && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+
+    return (() => document.removeEventListener('click', handleClick));
+  }, [isOpen]);
 
   return (
-    <div className={styles.dropDown}>
+    <div className={styles.dropDown} ref={dropDownRef}>
       <p className={styles.title}>
         {label}
       </p>
