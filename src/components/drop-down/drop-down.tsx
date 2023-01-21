@@ -19,7 +19,6 @@ export default function DropDown({
   const [currentItems, setCurrentItems] = useState<string[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const containerRef = useRef<HTMLDivElement>(null);
-  const dropListRef = useRef<HTMLDivElement>(null);
 
   const handleChangeItem = (e: ChangeEvent<HTMLInputElement>): void => {
     const { target } = e;
@@ -100,7 +99,6 @@ export default function DropDown({
         >
           <ArrowIcon
             className={`${styles.buttonIcon} ${isOpen ? styles.buttonIconOpen : ''}`}
-            // className={styles.buttonIcon}
             width="10px"
             height="5px"
           />
