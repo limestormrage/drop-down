@@ -6,9 +6,11 @@ import DropList from '../drop-list/drop-list';
 import { ReactComponent as ArrowIcon } from './arrow.svg';
 import { ReactComponent as RemoveIcon } from './remove.svg';
 import { IDopDownProps } from './interface';
+import { IDropItem } from '../../interface';
 
 export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [items, setItems] = useState<IDropItem[]>(MenuItems);
   const [currentItems, setCurrentItems] = useState<string[]>([]);
   const dropDownRef = useRef<HTMLDivElement>(null);
 
@@ -85,7 +87,7 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
 
       {isOpen && (
         <DropList
-          items={MenuItems}
+          items={items}
           currentItems={currentItems}
           onChangeItem={handleChangeItem}
         />
