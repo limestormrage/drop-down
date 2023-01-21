@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  ChangeEvent, useEffect, useRef, useState,
+} from 'react';
 import styles from './drop-down.module.css';
 import DropList from '../drop-list/drop-list';
 import { ReactComponent as ArrowIcon } from './arrow.svg';
@@ -7,7 +9,20 @@ import { IDopDownProps } from './interface';
 
 export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [currentItems, setCurrentItems] = useState<string[]>([]);
   const dropDownRef = useRef<HTMLDivElement>(null);
+
+  const handleChangeItem = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { target } = e;
+
+    if (currentItems.includes(target.value)) {
+      const newItems = currentItems.filter((item) => item !== target.value);
+
+      setCurrentItems(newItems);
+    } else {
+      setCurrentItems([...currentItems, target.value]);
+    }
+  };
 
   // добавляет обработчик для закрытия при нажатии вне компонента
   useEffect(() => {
@@ -75,7 +90,11 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
       </div>
 
       {isOpen && (
-        <DropList items={MenuItems} />
+        <DropList
+          items={MenuItems}
+          currentItems={currentItems}
+          onChangeItem={handleChangeItem}
+        />
       )}
 
     </div>

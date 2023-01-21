@@ -3,7 +3,11 @@ import styles from './drop-list.module.css';
 import { IDropListProps } from './interface';
 import { ReactComponent as SearchIcon } from './search.svg';
 
-export default function DropList({ items }: IDropListProps): JSX.Element {
+export default function DropList({
+  items,
+  currentItems,
+  onChangeItem,
+}: IDropListProps): JSX.Element {
   return (
     <div className={styles.dropList}>
       <div className={styles.search}>
@@ -13,7 +17,14 @@ export default function DropList({ items }: IDropListProps): JSX.Element {
       <div className={styles.itemList}>
         {items.map(({ id, label }) => (
           <div className={styles.item} key={id}>
-            <input className={styles.itemInput} type="checkbox" id={id} />
+            <input
+              className={styles.itemInput}
+              type="checkbox"
+              id={id}
+              value={label}
+              onChange={onChangeItem}
+              checked={currentItems.includes(label)}
+            />
             <label
               className={styles.itemLabel}
               htmlFor={id}

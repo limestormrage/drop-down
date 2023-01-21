@@ -2,6 +2,7 @@ export const languages = [
   {
     label: 'Русский',
     id: 'russian',
+    icon: 'assets/flags/russian.svg',
   },
   {
     label: 'Английский',
