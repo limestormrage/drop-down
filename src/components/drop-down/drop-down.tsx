@@ -8,7 +8,11 @@ import { ReactComponent as RemoveIcon } from './remove.svg';
 import { IDopDownProps } from './interface';
 import { IDropItem } from '../../interface';
 
-export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Element {
+export default function DropDown({
+  label,
+  MenuItems,
+  MultiSelect,
+}: IDopDownProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [items, setItems] = useState<IDropItem[]>(MenuItems);
   const [currentItems, setCurrentItems] = useState<string[]>([]);
@@ -17,6 +21,11 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
 
   const handleChangeItem = (e: ChangeEvent<HTMLInputElement>): void => {
     const { target } = e;
+
+    if (!MultiSelect) {
+      setCurrentItems([target.value]);
+      return;
+    }
 
     if (currentItems.includes(target.value)) {
       const newItems = currentItems.filter((item) => item !== target.value);
@@ -95,6 +104,7 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
 
       {isOpen && (
         <DropList
+          multiSelect={MultiSelect}
           items={items}
           currentItems={currentItems}
           searchValue={searchValue}

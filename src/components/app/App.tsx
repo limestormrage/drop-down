@@ -11,6 +11,7 @@ function App(): JSX.Element {
         <DropDown
           label="Язык"
           MenuItems={languages}
+          MultiSelect={false}
         />
       </Layout>
     </div>

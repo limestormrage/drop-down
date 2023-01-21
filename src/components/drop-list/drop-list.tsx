@@ -4,12 +4,15 @@ import { IDropListProps } from './interface';
 import { ReactComponent as SearchIcon } from './search.svg';
 
 export default function DropList({
+  multiSelect,
   items,
   currentItems,
   searchValue,
   onChangeItem,
   onChangeSearch,
 }: IDropListProps): JSX.Element {
+  const itemType = multiSelect ? 'checkbox' : 'radio';
+
   return (
     <div className={styles.dropList}>
       <div className={styles.search}>
@@ -27,8 +30,9 @@ export default function DropList({
           <div className={styles.item} key={id}>
             <input
               className={styles.itemInput}
-              type="checkbox"
+              type={itemType}
               id={id}
+              name="test"
               value={label}
               onChange={onChangeItem}
               checked={currentItems.includes(label)}
