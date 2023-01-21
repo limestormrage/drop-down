@@ -25,10 +25,16 @@
   height: 14px;
 }
 
+.searchInputWrapper {
+  display: flex;
+  flex-grow: 1;
+}
+
 .searchInput {
   font-size: 16px;
   line-height: 20px;
   font-weight: 400;
+  flex-grow: 1;
   padding-left: 8px;
   background-color: #F4F4F4;
   outline: none;
@@ -42,6 +48,10 @@
 
 .itemList {
   margin-top: 20px;
+}
+
+.item {
+  position: relative;
 }
 
 .item:not(:first-child) {
@@ -71,7 +81,7 @@
 
 .itemLabel::before {
   position: absolute;
-  right: 16px;
+  right: 0;
   content: "";
   width: 24px;
   height: 24px;

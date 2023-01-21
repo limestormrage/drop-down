@@ -17,13 +17,15 @@ export default function DropList({
     <div className={styles.dropList}>
       <div className={styles.search}>
         <SearchIcon className={styles.searchIcon} width="14px" height="14px" />
-        <input
-          className={styles.searchInput}
-          type="search"
-          placeholder="Поиск"
-          onChange={onChangeSearch}
-          value={searchValue}
-        />
+        <div className={styles.searchInputWrapper}>
+          <input
+            className={styles.searchInput}
+            type="search"
+            placeholder="Поиск"
+            onChange={onChangeSearch}
+            value={searchValue}
+          />
+        </div>
       </div>
       <div className={styles.itemList}>
         {items.map(({ id, label }) => (
