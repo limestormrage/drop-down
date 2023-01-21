@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React from 'react';
 import styles from './drop-list.module.css';
 import { IDropListProps } from './interface';
 import { ReactComponent as SearchIcon } from './search.svg';
@@ -6,13 +6,10 @@ import { ReactComponent as SearchIcon } from './search.svg';
 export default function DropList({
   items,
   currentItems,
+  searchValue,
   onChangeItem,
+  onChangeSearch,
 }: IDropListProps): JSX.Element {
-  const [searchValue, setSearchValue] = useState<string>('');
-
-  const handleChangeSearch = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    setSearchValue(target.value);
-  };
   return (
     <div className={styles.dropList}>
       <div className={styles.search}>
@@ -21,7 +18,7 @@ export default function DropList({
           className={styles.searchInput}
           type="search"
           placeholder="Поиск"
-          onChange={handleChangeSearch}
+          onChange={onChangeSearch}
           value={searchValue}
         />
       </div>

@@ -12,6 +12,7 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [items, setItems] = useState<IDropItem[]>(MenuItems);
   const [currentItems, setCurrentItems] = useState<string[]>([]);
+  const [searchValue, setSearchValue] = useState<string>('');
   const dropDownRef = useRef<HTMLDivElement>(null);
 
   const handleChangeItem = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -28,6 +29,13 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
 
   const removeItem = (currentItem: string): void => {
     setCurrentItems(currentItems.filter((item) => item !== currentItem));
+  };
+
+  const handleChangeSearch = ({ target }: ChangeEvent<HTMLInputElement>): void => {
+    setSearchValue(target.value);
+    setItems(MenuItems.filter((item) => (
+      item.label.toLowerCase().includes(target.value.toLowerCase())
+    )));
   };
 
   // добавляет обработчик для закрытия при нажатии вне компонента
@@ -89,7 +97,9 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
         <DropList
           items={items}
           currentItems={currentItems}
+          searchValue={searchValue}
           onChangeItem={handleChangeItem}
+          onChangeSearch={handleChangeSearch}
         />
       )}
 
