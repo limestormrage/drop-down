@@ -24,6 +24,10 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
     }
   };
 
+  const removeItem = (currentItem: string): void => {
+    setCurrentItems(currentItems.filter((item) => item !== currentItem));
+  };
+
   // добавляет обработчик для закрытия при нажатии вне компонента
   useEffect(() => {
     const handleClick = (e: Event): void => {
@@ -55,6 +59,7 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
                 className={styles.labelButton}
                 type="button"
                 aria-label="удалить фильтр"
+                onClick={() => removeItem(item)}
               >
                 <RemoveIcon
                   className={styles.labelIcon}
