@@ -1,7 +1,8 @@
 import { IDropItem } from '../../interface';
 
 export interface IDopDownProps {
-  label: string;
-  MenuItems: IDropItem[];
-  MultiSelect: boolean;
+  dropDownLabel: string;
+  menuItems: IDropItem[];
+  isMultiSelect: boolean;
+  isShowIcons: boolean;
 }

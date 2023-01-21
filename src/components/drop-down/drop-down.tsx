@@ -9,20 +9,22 @@ import { IDopDownProps } from './interface';
 import { IDropItem } from '../../interface';
 
 export default function DropDown({
-  label,
-  MenuItems,
-  MultiSelect,
+  dropDownLabel,
+  menuItems,
+  isMultiSelect,
+  isShowIcons,
 }: IDopDownProps): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [items, setItems] = useState<IDropItem[]>(MenuItems);
+  const [items, setItems] = useState<IDropItem[]>(menuItems);
   const [currentItems, setCurrentItems] = useState<string[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
-  const dropDownRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dropListRef = useRef<HTMLDivElement>(null);
 
   const handleChangeItem = (e: ChangeEvent<HTMLInputElement>): void => {
     const { target } = e;
 
-    if (!MultiSelect) {
+    if (!isMultiSelect) {
       setCurrentItems([target.value]);
       return;
     }
@@ -42,7 +44,7 @@ export default function DropDown({
 
   const handleChangeSearch = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     setSearchValue(target.value);
-    setItems(MenuItems.filter((item) => (
+    setItems(menuItems.filter((item) => (
       item.label.toLowerCase().includes(target.value.toLowerCase())
     )));
   };
@@ -54,20 +56,22 @@ export default function DropDown({
         return;
       }
 
-      if (!dropDownRef.current?.contains(e.target) && isOpen) {
+      if (!containerRef.current?.contains(e.target) && isOpen) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('click', handleClick);
+    if (isOpen) {
+      document.addEventListener('click', handleClick);
+    }
 
     return (() => document.removeEventListener('click', handleClick));
   }, [isOpen]);
 
   return (
-    <div className={styles.dropDown} ref={dropDownRef}>
+    <div className={styles.dropDown} ref={containerRef}>
       <p className={styles.title}>
-        {label}
+        {dropDownLabel}
       </p>
       <div className={styles.select}>
         <div className={styles.selectLabels}>
@@ -95,7 +99,8 @@ export default function DropDown({
           onClick={() => setIsOpen(!isOpen)}
         >
           <ArrowIcon
-            className={styles.buttonIcon}
+            className={`${styles.buttonIcon} ${isOpen ? styles.buttonIconOpen : ''}`}
+            // className={styles.buttonIcon}
             width="10px"
             height="5px"
           />
@@ -104,9 +109,11 @@ export default function DropDown({
 
       {isOpen && (
         <DropList
-          multiSelect={MultiSelect}
+          multiSelect={isMultiSelect}
+          isShowIcons={isShowIcons}
           items={items}
           currentItems={currentItems}
+          dropDownLabel={dropDownLabel}
           searchValue={searchValue}
           onChangeItem={handleChangeItem}
           onChangeSearch={handleChangeSearch}
