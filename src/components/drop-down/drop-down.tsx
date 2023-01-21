@@ -1,5 +1,5 @@
 import React, {
-  ChangeEvent, useEffect, useRef, useState,
+  ChangeEvent, useState,
 } from 'react';
 import styles from './drop-down.module.css';
 import DropList from '../drop-list/drop-list';
@@ -7,6 +7,7 @@ import { ReactComponent as ArrowIcon } from './arrow.svg';
 import { ReactComponent as RemoveIcon } from './remove.svg';
 import { IDopDownProps } from './interface';
 import { IDropItem } from '../../interface';
+import { useToggleList } from './hook/useToggleList';
 
 export default function DropDown({
   dropDownLabel,
@@ -14,11 +15,11 @@ export default function DropDown({
   isMultiSelect,
   isShowIcons,
 }: IDopDownProps): JSX.Element {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [items, setItems] = useState<IDropItem[]>(menuItems);
   const [currentItems, setCurrentItems] = useState<string[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
-  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { containerRef, isOpenList, setIsOpenList } = useToggleList();
 
   const handleChangeItem = (e: ChangeEvent<HTMLInputElement>): void => {
     const { target } = e;
@@ -48,25 +49,6 @@ export default function DropDown({
     )));
   };
 
-  // добавляет обработчик для закрытия при нажатии вне компонента
-  useEffect(() => {
-    const handleClick = (e: Event): void => {
-      if (!(e.target instanceof HTMLElement)) {
-        return;
-      }
-
-      if (!containerRef.current?.contains(e.target) && isOpen) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener('click', handleClick);
-    }
-
-    return (() => document.removeEventListener('click', handleClick));
-  }, [isOpen]);
-
   return (
     <div className={styles.dropDown} ref={containerRef}>
       <p className={styles.title}>
@@ -95,17 +77,17 @@ export default function DropDown({
         <button
           className={styles.selectButton}
           type="button"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpenList(!isOpenList)}
         >
           <ArrowIcon
-            className={`${styles.buttonIcon} ${isOpen ? styles.buttonIconOpen : ''}`}
+            className={`${styles.buttonIcon} ${isOpenList ? styles.buttonIconOpen : ''}`}
             width="10px"
             height="5px"
           />
         </button>
       </div>
 
-      {isOpen && (
+      {isOpenList && (
         <DropList
           multiSelect={isMultiSelect}
           isShowIcons={isShowIcons}
