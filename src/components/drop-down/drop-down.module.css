@@ -8,7 +8,7 @@
   color: #333333;
 }
 
-.dropDownTest {
+.select {
   display: flex;
   align-items: center;
   border: 1px solid #C1C1C1;
@@ -17,17 +17,13 @@
   margin-top: 4px;
 }
 
-.dropDownTestButton {
-  margin-left: auto;
-}
-
-.labels {
+.selectLabels {
   display: flex;
   flex-wrap: wrap;
   width: 90%;
 }
 
-.label {
+.selectLabel {
   display: flex;
   align-items: center;
   padding: 6px 12px;
@@ -36,28 +32,29 @@
   margin: 5px 4px 0 0;
 }
 
-.label:last-child {
+.selectLabel:last-child {
   margin-right: 0;
 }
 
-.labelText {
+.selectLabelText {
   font-weight: 500;
   font-size: 12px;
   line-height: 12px;
   color: #333333;
 }
 
-.labelButton {
+.selectLabelButton {
   margin-left: 10px;
   cursor: pointer;
 }
 
-.labelIcon {
+.selectLabelIcon {
   width: 8px;
   height: 8px;
 }
 
-.dropDownTestButton {
+.selectButton {
+  margin-left: auto;
   cursor: pointer;
 }
 

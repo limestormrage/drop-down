@@ -69,19 +69,19 @@ export default function DropDown({
       <p className={styles.title}>
         {label}
       </p>
-      <div className={styles.dropDownTest}>
-        <div className={styles.labels}>
+      <div className={styles.select}>
+        <div className={styles.selectLabels}>
           {currentItems.map((item) => (
-            <div className={styles.label} key={item}>
-              <p className={styles.labelText}>{item}</p>
+            <div className={styles.selectLabel} key={item}>
+              <p className={styles.selectLabelText}>{item}</p>
               <button
-                className={styles.labelButton}
+                className={styles.selectLabelButton}
                 type="button"
                 aria-label="удалить фильтр"
                 onClick={() => removeItem(item)}
               >
                 <RemoveIcon
-                  className={styles.labelIcon}
+                  className={styles.selectLabelIcon}
                   width="8px"
                   height="8px"
                 />
@@ -90,7 +90,7 @@ export default function DropDown({
           ))}
         </div>
         <button
-          className={styles.dropDownTestButton}
+          className={styles.selectButton}
           type="button"
           onClick={() => setIsOpen(!isOpen)}
         >
