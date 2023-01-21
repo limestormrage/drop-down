@@ -20,7 +20,7 @@
 .selectLabels {
   display: flex;
   flex-wrap: wrap;
-  width: 90%;
+  flex-grow: 1;
 }
 
 .selectLabel {
@@ -54,7 +54,7 @@
 }
 
 .selectButton {
-  margin-left: auto;
+  margin-left: 10px;
   cursor: pointer;
 }
 
