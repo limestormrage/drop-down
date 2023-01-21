@@ -48,33 +48,22 @@ export default function DropDown({ label, MenuItems }: IDopDownProps): JSX.Eleme
       </p>
       <div className={styles.dropDownTest}>
         <div className={styles.labels}>
-          <div className={styles.label}>
-            <p className={styles.labelText}>Английский</p>
-            <button
-              className={styles.labelButton}
-              type="button"
-              aria-label="удалить фильтр"
-            >
-              <RemoveIcon
-                className={styles.labelIcon}
-                width="8px"
-                height="8px"
-              />
-            </button>
-          </div>
-          <div className={styles.label}>
-            <p className={styles.labelText}>Немецкий</p>
-            <button
-              className={styles.labelButton}
-              type="button"
-            >
-              <RemoveIcon
-                className={styles.labelIcon}
-                width="8px"
-                height="8px"
-              />
-            </button>
-          </div>
+          {currentItems.map((item) => (
+            <div className={styles.label} key={item}>
+              <p className={styles.labelText}>{item}</p>
+              <button
+                className={styles.labelButton}
+                type="button"
+                aria-label="удалить фильтр"
+              >
+                <RemoveIcon
+                  className={styles.labelIcon}
+                  width="8px"
+                  height="8px"
+                />
+              </button>
+            </div>
+          ))}
         </div>
         <button
           className={styles.dropDownTestButton}
